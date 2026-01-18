@@ -2,9 +2,7 @@ import React, { useRef } from 'react'
 import Card from './Card'
 
 const ForeGround = () => {
-    const ref = useRef(null);
-  
-
+  const ref = useRef(null)
 
   const cardsData = [
     { id: 1, tag: "#Exam", title: "Maths Endsem", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.", date: "16 Jan 2026" },
@@ -17,15 +15,16 @@ const ForeGround = () => {
   ]
 
   return (
-    <div ref={ref} className='w-full h-screen fixed z-30 top-0 left-0 flex flex-wrap gap-x-1 gap-y-1 p-4 overflow-y-auto'>
-      {cardsData.map((card) => (
+    <div
+      ref={ref}
+      className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] 
+                 z-20 p-4 flex flex-wrap gap-3 overflow-y-auto"
+    >
+      {cardsData.map(card => (
         <Card
           key={card.id}
-          tag={card.tag}
-          title={card.title}
-          content={card.content}
-          date={card.date}
-          reference = {ref}
+          {...card}
+          reference={ref}
         />
       ))}
     </div>
@@ -33,6 +32,3 @@ const ForeGround = () => {
 }
 
 export default ForeGround
-
-
-
