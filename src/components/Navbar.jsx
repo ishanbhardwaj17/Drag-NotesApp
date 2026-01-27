@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ onAddClick }) => {
 
     const [open, setOpen] = useState(false);
     return (
@@ -45,7 +45,7 @@ const Navbar = () => {
                 {/* Right - Actions */}
                 <div className="flex items-center gap-4">
 
-                    <button className="text-sm px-4 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition">
+                    <button onClick={onAddClick} className="text-sm px-4 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition">
                         Add Task
                     </button>
 
