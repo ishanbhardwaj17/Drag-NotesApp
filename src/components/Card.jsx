@@ -1,8 +1,8 @@
 import React from 'react'
-import { FiEdit2 } from "react-icons/fi";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { motion, scale } from "framer-motion"
 
-const Card = ({ tag, title, content, date, reference }) => {
+const Card = ({ id, tag, title, content, date, reference, onDelete, onEdit }) => {
     return (
         <motion.div
             drag
@@ -27,9 +27,14 @@ const Card = ({ tag, title, content, date, reference }) => {
             <div className='Foot w-full mt-4'>
                 <div className='flex justify-between items-center'>
                     <h4 className='text-gray-600 text-sm'>{date}</h4>
-                    <button className='text-blue-600 hover:text-blue-800 text-sm font-medium'>
-                        <FiEdit2 size={18} />
-                    </button>
+                    <div className='flex gap-2'>
+                        <button onClick={() => onEdit({ id, tag, title, content, date })} className='text-blue-600 hover:text-blue-800 text-sm font-medium'>
+                            <FiEdit2 size={18} />
+                        </button>
+                        <button onClick={() => onDelete(id)} className='text-red-600 hover:text-red-800 text-sm font-medium'>
+                            <FiTrash2 size={18} />
+                        </button>
+                    </div>
                 </div>
             </div>
         </motion.div>

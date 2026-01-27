@@ -1,12 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-const PopUp = ({ isOpen, onClose }) => {
+const PopUp = ({ isOpen, onClose, onSave, editingCard }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     tag: '',
     date: ''
   })
+
+  useEffect(() => {
+    if (editingCard) {
+      setFormData({
+        title: editingCard.title,
+        description: editingCard.content,
+        tag: editingCard.tag,
+        date: editingCard.date
+      })
+    } else {
+      setFormData({
+        title: '',
+        description: '',
+        tag: '',
+        date: ''
+      })
+    }
+  }, [editingCard, isOpen])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -18,8 +36,9 @@ const PopUp = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form Data:', formData)
-    // Add logic to save the task here
+    if (onSave) {
+      onSave(formData)
+    }
     setFormData({ title: '', description: '', tag: '', date: '' })
     onClose()
   }
@@ -39,7 +58,7 @@ const PopUp = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-slate-100">
-            Add New Note
+            {editingCard ? 'Edit Note' : 'Add New Note'}
           </h2>
           <button
             onClick={onClose}
@@ -124,7 +143,7 @@ const PopUp = ({ isOpen, onClose }) => {
               type="submit"
               className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500"
             >
-              Save Note
+              {editingCard ? 'Update Note' : 'Save Note'}
             </button>
           </div>
         </form>
